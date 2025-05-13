@@ -9,31 +9,31 @@
 # 1. Configure Basic Device Settings
 
 Hostname | *`(config)#` mode*
-```
+```ruby
 hostname <HOSTNAME_HERE>
 ```
 
 Domain name | *`(config#)` mode*
-```
+```ruby
 ip domain-name <DOMAIN_NAME_HERE>
 ```
 
 Interface IP addresses | *`(config)#` mode*
-```
+```ruby
 int <INTF_ID_HERE>
 ip add <IPV4_HERE> <SUBNET_MASK_HERE>
 exit
 ```
 
 Access Passwords | *`(config)#` mode*
-```
+```ruby
 enable secret <PASSWORD_HERE>
 ```
 
 ## 1.1 OSPF
 
 Loopback `Lo0` interface | *`(config)#` mode*
-```
+```ruby
 int loopback 0
 ip add <IPV4_HERE> <SUBNET MASK HERE>
 no sh
@@ -41,12 +41,12 @@ exit
 ```
 
 Static default route / Default static route | *`(config)#` mode*
-```
+```ruby
 ip route 0.0.0.0 <INTF_NAME_OR_IPV4_HERE|example: `lo0`>
 ```
 
 OSPF Dynamic Routing Protocol | *`(config)#` mode*
-```
+```ruby
 router ospf 1
 network <NETWORK_ADDRESS_HERE> area <AREA_ID_HERE>
 default-information originate
@@ -54,22 +54,21 @@ exit
 ```
 
 # 2. SSH Server
-
 > [!WARNING]
 > Prerequisites: Hostname, Domain name
 
 Local user / Privileged user | *`(config)#` mode*
-```
+```ruby
 username <USERNAME_HERE> privilege <PRIVILEGE_HERE|highest: 15> secret <PASSWORD_HERE>
 ```
 
 RSA Key Generation | *`(config)#` mode*
-```
+```ruby
 crypto key generate rsa mod <RSA_MOD_HERE|example: 1024>
 ```
 
 Enable SSH Version 2 | *`(config)#` mode*
-```
+```ruby
 ip ssh ver 2
 ```
 
@@ -80,7 +79,7 @@ ip ssh authentication-retries <RETRY_COUNT|example: 2>
 ```
 
 Named ACL / Access List / Access Control List for Restricted SSH Access | *`(config)# mode`*
-```
+```ruby
 ip access-list standard <ACL_NAME_OR_NUM_HERE|example: SSH_RESTRICT>
 permit <NETWORK_ADDR_HERE> <SUBNET_MASK_HERE>
 ! Repeat above permit command here for multiple networks
@@ -107,7 +106,7 @@ exit
 > will have to perform *password recovery*.
 
 Enable AAA features | *`(config)# mode`*
-```
+```ruby
 aaa new-model
 ```
 
@@ -287,7 +286,7 @@ switchport port-sec
 # 9. DHCP Snooping
 
 Enable DHCP snooping | *`(config)#` mode*
-```
+```ruby
 ! Global
 ip dhcp snooping
 
@@ -299,5 +298,4 @@ Limit number of DHCP requests | *`(config-if)#` mode*
 ```ruby
 ip dhcp snooping limit rate <NUMBER_OF_REQUESTS|example: 6>
 ```
-
 
