@@ -94,7 +94,7 @@ VTY Line Config | *`(config)# mode`*
 line vty <VTY_BEGIN_ID|example: 0> <VTY_END_ID|example: 15>
 login local
 trans in ssh
-priv 15
+priv level 15
 access-class <ACL_NAME_OR_NUM_HERE|example: SSH_RESTRICT> in
 exit
 ```
@@ -117,7 +117,7 @@ radius-server host <SERVER_IP_HERE> key <KEY_HERE>
 
 RADIUS with fallback to no authentication | *`(config)#` mode*
 ```ruby
-aaa auth login default group radius none
+aaa authentication login default group radius none
 ```
 
 RADIUS with Telnet access | *`(config)# mode`
@@ -133,9 +133,9 @@ exit
 > [!WARNING]
 > Prerequisites: Enable AAA features
 
-Root view configuration | *`(config)#` mode*
+Admin / superuser view configuration | *`(config)#` mode*
 ```ruby
-parser view root
+parser view <VIEW_NAME_HERE|example: admin>
 secret <ROOT_SECRET_HERE>
 enable view
 exit
