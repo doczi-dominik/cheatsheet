@@ -87,6 +87,16 @@ deny any
 exit
 ```
 
+Apply ACL to Interface | *`(config-int)#` mode*
+
+```ruby
+! IPv4
+ip access-group <ACL_NAME_HERE> <in|out>
+
+!IPv6
+ipv6 traffic-filter <ACL_NAME_HERE> <in|out>
+```
+
 VTY Line Config | *`(config)# mode`*
 > [!CAUTION]
 > Configure an ACL for SSH restriction first OR remove the `access-class` command
@@ -232,6 +242,7 @@ Create Class Map to match traffic types | *`(config)#` mode*
 ```ruby
 class-map type inspect <MATCH_TYPE_HERE|either: match-any, match-all> <CLASS_MAP_NAME_HERE>
 match protocol <PROTOCOL_HERE|example: https>
+match access-group name
 ! repeat above match command here for multiple protocols
 exit
 ```
@@ -248,6 +259,12 @@ Create Zone Pairs | *`(config)#` mode*
 ```ruby
 zone-pair security <PAIR_NAME_HERE> source <SOURCE_ZONE_NAME_HERE> destination <DEST_ZONE_NAME_HERE>
 service-policy type inspect <POLICY_MAP_NAME_HERE>
+```
+
+Apply Zones on Interfaces / Configure Zone Member | *`(config-int)#` mode*
+
+```ruby
+zone-member security <ZONE_NAME_HERE>
 ```
 
 # 8. Layer 2 / L2 / Layer2 Configuration and L2 Security
