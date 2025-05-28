@@ -233,11 +233,6 @@ Defining zones | *`(config)#` mode*
 zone sec <ZONE_NAME|example: INSIDE>
 ```
 
-Assign zones to interfaces | *`(config-if)#` mode*
-```ruby
-zone-member sec <ZONE_NAME|example: INSIDE>
-```
-
 Create Class Map to match traffic types | *`(config)#` mode*
 ```ruby
 class-map type inspect <MATCH_TYPE_HERE|either: match-any, match-all> <CLASS_MAP_NAME_HERE>
@@ -250,7 +245,7 @@ exit
 Create Policy Map | *`(config)#` mode*
 ```ruby
 policy-map type inspect <POLICY_MAP_NAME_HERE>
- class <CLASS_MAP_NAME_HERE|to use default: class-default>
+ class type inspect <CLASS_MAP_NAME_HERE|to use default: class-default>
   <ACTION_HERE|either: drop, inspect>
 ```
 
@@ -264,7 +259,7 @@ service-policy type inspect <POLICY_MAP_NAME_HERE>
 Apply Zones on Interfaces / Configure Zone Member | *`(config-int)#` mode*
 
 ```ruby
-zone-member security <ZONE_NAME_HERE>
+zone-member security <ZONE_NAME_HERE|example: INSIDE>
 ```
 
 # 8. Layer 2 / L2 / Layer2 Configuration and L2 Security
